@@ -36,3 +36,21 @@ class Shipment(models.Model):
     price = models.FloatField()
 
 
+
+class User(models.Model):
+        email = models.EmailField()
+        password = models.CharField(max_length=64)
+        first_name = models.CharField(max_length=64)
+        last_name = models.CharField(max_length=64)
+        date_joined = models.DateTimeField(auto_now_add=True)
+        last_login = models.DateTimeField(auto_now=True)
+        admin = models.BooleanField(default=False)
+        guest = models.BooleanField(default=False)
+	shipments = []
+        def __unicode__(self):
+                return self.full_name()
+        class Meta:
+                db_table = 'users'
+        def full_name(self):
+                return self.first_name + " " + self.last_name
+
